@@ -1,0 +1,20 @@
+BUILD_DIR = ../../bin/rpcboost ;
+
+import python ;
+
+project rpcboost
+	: requirements 
+		<library>..//boost_system
+		<library>..//boost_filesystem
+		<library>..//boost_thread
+		<library>..//boost_python
+		<library>..//boost_regex
+		<library>..//boost_iostreams
+		<threading>multi
+	: build-dir $(BUILD_DIR)
+	;
+   
+lib rpcboost
+	: [ glob-tree *.cpp : test*.cpp .svn ] /python//python 
+	;
+

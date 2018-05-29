@@ -1,0 +1,22 @@
+BUILD_DIR = ../../bin/rpcmain ;
+
+project hub
+	: requirements 
+		<library>../lib//rpcboost
+		<library>..//boost_thread
+		<library>..//boost_system
+		<threading>multi
+	: build-dir $(BUILD_DIR)
+	;
+
+exe hub : [ glob *.cpp ] ;
+
+install installed : rpcmain :
+        <variant>debug:<location>$(BUILD_DIR)/debug
+        <variant>debug:<dll-path>$(BUILD_DIR)/debug
+        <variant>release:<location>$(BUILD_DIR)/release
+        <variant>release:<dll-path>$(BUILD_DIR)/release
+        <install-dependencies>on <install-type>EXE
+        <install-type>LIB
+        ;
+
