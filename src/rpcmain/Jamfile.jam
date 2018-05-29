@@ -1,6 +1,6 @@
 BUILD_DIR = ../../bin/rpcmain ;
 
-project hub
+project rpcmain
 	: requirements 
 		<library>../lib//rpcboost
 		<library>..//boost_thread
@@ -9,7 +9,7 @@ project hub
 	: build-dir $(BUILD_DIR)
 	;
 
-exe hub : [ glob *.cpp ] ;
+exe rpcmain : [ glob *.cpp ] ;
 
 install installed : rpcmain :
         <variant>debug:<location>$(BUILD_DIR)/debug
