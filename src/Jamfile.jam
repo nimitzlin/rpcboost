@@ -6,6 +6,7 @@ lib boost_filesystem : : <name>boost_filesystem <search>/usr/local/lib ;
 lib boost_regex : : <name>boost_regex <search>/usr/local/lib ;
 lib boost_iostreams : : <name>boost_iostreams <search>/usr/local/lib ;
 lib boost_locale : : <name>boost_locale <search>/usr/local/lib ;
+lib boost_log : : <name>boost_log <search>/usr/local/lib ;
 
 for local dir in [ glob * : proto proto_python .svn *.jam script ] {
         build-project $(dir) ;

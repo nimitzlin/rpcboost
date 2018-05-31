@@ -3,8 +3,19 @@
 #include "server_manager.hpp"
 
 
+#include <boost/log/core.hpp>
+#include <boost/log/trivial.hpp>
+#include <boost/log/expressions.hpp>
+#include <boost/log/sinks/text_file_backend.hpp>
+#include <boost/log/utility/setup/file.hpp>
+#include <boost/log/utility/setup/common_attributes.hpp>
+#include <boost/log/sources/severity_logger.hpp>
+#include <boost/log/sources/record_ostream.hpp>
+
+
 namespace rpcboost {
 namespace common {
+
 
 
 server_manager* server_manager::s_inst_ = NULL;
@@ -12,11 +23,15 @@ server_manager* server_manager::s_inst_ = NULL;
 server_manager::server_manager():
 	thread_pool_size_(10)
 {
+	BOOST_LOG_TRIVIAL(trace)<<"server_manager start";
 }
 
 server_manager::~server_manager()
 {
 }
+
+
+
 
 void server_manager::add(const server_ptr& server)
 {

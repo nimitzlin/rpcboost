@@ -2,14 +2,17 @@ BUILD_DIR = ../../bin/rpcmain ;
 
 project rpcmain
 	: requirements 
-		<library>../lib//rpcboost
-		<library>..//boost_thread
 		<library>..//boost_system
+		<library>..//boost_thread
+		<library>..//boost_log
+		<library>../lib//rpcboost
 		<threading>multi
 	: build-dir $(BUILD_DIR)
 	;
 
-exe rpcmain : [ glob *.cpp ] ;
+exe rpcmain : [ glob *.cpp ] 
+			: <cxxflags>-DBOOST_ALL_DYN_LINK
+			;
 
 install installed : rpcmain :
         <variant>debug:<location>$(BUILD_DIR)/debug

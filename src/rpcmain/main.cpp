@@ -6,6 +6,14 @@
 #include <boost/thread.hpp>
 #include <boost/bind.hpp>
 
+#include <boost/log/core.hpp>
+#include <boost/log/trivial.hpp>
+#include <boost/log/expressions.hpp>
+#include <boost/log/sinks/text_file_backend.hpp>
+#include <boost/log/utility/setup/file.hpp>
+#include <boost/log/utility/setup/common_attributes.hpp>
+#include <boost/log/sources/severity_logger.hpp>
+#include <boost/log/sources/record_ostream.hpp>
 
 #include "../lib/common/server_manager.hpp"
 
@@ -64,10 +72,16 @@ private:
 };
 
 
+void initlog()
+{
+	boost::log::add_file_log("sample.log");
+}
+
 int main(int argc, char* argv[])
 {
 
-		
+	initlog();
+	 BOOST_LOG_TRIVIAL(trace)<<"app start";
 
 	rpcboostapp app;
 	app.run();

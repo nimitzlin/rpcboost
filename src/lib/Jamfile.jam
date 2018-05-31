@@ -4,6 +4,7 @@ import python ;
 
 project rpcboost
 	: requirements 
+		<library>..//boost_log
 		<library>..//boost_system
 		<library>..//boost_filesystem
 		<library>..//boost_thread
@@ -16,5 +17,6 @@ project rpcboost
    
 lib rpcboost
 	: [ glob-tree *.cpp : test*.cpp .svn ] /python//python 
+	: <cxxflags>-DBOOST_ALL_DYN_LINK
 	;
 

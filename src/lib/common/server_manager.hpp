@@ -15,7 +15,12 @@ class server_manager
 	: private boost::noncopyable
 {
 public:
-	static server_manager& instance() { return *s_inst_; }
+	static server_manager& instance() 
+	{ if(!s_inst_){ 
+		init();
+		}
+	  return *s_inst_; 
+	}
 	static void init() { s_inst_ = new server_manager(); }
 	static void fini() { delete s_inst_; }
 	
