@@ -12,6 +12,7 @@
 #include <boost/log/sources/severity_logger.hpp>
 #include <boost/log/sources/record_ostream.hpp>
 
+//#define BOOST_LOG_DYN_LINK 1
 
 namespace rpcboost {
 namespace common {

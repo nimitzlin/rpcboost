@@ -16,6 +16,7 @@
 #include <boost/log/sources/record_ostream.hpp>
 
 #include "../lib/common/server_manager.hpp"
+#define BOOST_LOG_DYN_LINK 1
 
 class rpcboostapp
 {
@@ -74,14 +75,14 @@ private:
 
 void initlog()
 {
-	boost::log::add_file_log("sample.log");
+	boost::log::add_file_log("server.log");
 }
 
 int main(int argc, char* argv[])
 {
 
-	initlog();
-	 BOOST_LOG_TRIVIAL(trace)<<"app start";
+	//initlog();
+	BOOST_LOG_TRIVIAL(info) << "main start";
 
 	rpcboostapp app;
 	app.run();
