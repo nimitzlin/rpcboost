@@ -1,4 +1,4 @@
-set(CMAKE_CXX_FLAGS "-std=c++0x ${CMAKE_CXX_FLAGS} -g -ftest-coverage -fprofile-arcs -DBOOST_LOG_DYN_LINK")
+set(CMAKE_CXX_FLAGS "-std=c++0x ${CMAKE_CXX_FLAGS} -g -ftest-coverage -fprofile-arcs -DBOOST_LOG_DYN_LINK -l protobuf")
 FIND_PACKAGE( Boost 1.55 COMPONENTS system thread date_time filesystem
 regex iostreams locale log REQUIRED )
 FIND_PACKAGE(Protobuf)
@@ -15,6 +15,10 @@ add_library(rpcboost
 			lib/common/connection_manager.hpp
 			lib/common/connection.cpp
 			lib/common/connection.hpp
+			lib/common/normal_listen_connection.cpp
+			lib/common/normal_listen_connection.hpp
+			lib/common/rpc_listen_connection.cpp
+			lib/common/rpc_listen_connection.hpp
 
 			lib/rpc/channel_request.hpp
 			lib/rpc/channel_request.cpp
@@ -25,6 +29,10 @@ add_library(rpcboost
 			)
 add_library(rpcboost ${PROTO_SRCS} ${PROTO_HDRS})
 link_libraries(rpcboost)
-ADD_EXECUTABLE(rpcmainexe rpcmain/main.cpp )
 
-TARGET_LINK_LIBRARIES( rpcmainexe LINK_PUBLIC ${Boost_LIBRARIES} -lpthread -lm)
+AUX_SOURCE_DIRECTORY(rpcmain DIR_TEST1_SRCS)
+ADD_LIBRARY ( rpcserver ${DIR_TEST1_SRCS})
+
+ADD_EXECUTABLE(rpcmainexe rpcmain/main.cpp)
+
+TARGET_LINK_LIBRARIES( rpcmainexe LINK_PUBLIC ${Boost_LIBRARIES} -lpthread -lm rpcserver)

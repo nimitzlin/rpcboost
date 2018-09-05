@@ -6,40 +6,16 @@ option py_generic_services = true;
 message Void {
 }
 
-message StubMsg {
-	required bytes fromHost = 1;
-	required bytes toHost = 2;
-	required bytes eName = 3;
-	required bytes funcArgs = 4;
-}
-    
-enum Component{
-        BASE = 0;
-        CELL = 1;
-        CLIENT = 2;
-    }
-    
-message EntityMsg {
-	required bytes fromHost = 1;
-	required bytes toHost = 2;
-	required bytes box = 3;
-	required bytes eName = 4;
-	required Component eCom = 5 [default=BASE];
-	required bytes funcArgs = 6;
-}
 
-message Host {
-	required bytes name = 1;
-	required int32 cid = 2;
+message InfoMsg {
+	required bytes msg = 1;
+	required int32 id = 2;
 }
 
 service ServerService {
-	rpc recvHost (Host) returns (Void);
-	rpc transStubMsg (StubMsg) returns (Void);
-	rpc transEntityMsg (EntityMsg) returns (Void);
+	rpc SendServerMsg (InfoMsg) returns (Void);
 }
 
 service ClientService {
-	rpc recvStubMsg (StubMsg) returns (Void);
-	rpc recvEntityMsg (EntityMsg) returns (Void);
+	rpc SendClientMsg (InfoMsg) returns (Void);
 }

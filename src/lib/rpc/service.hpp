@@ -11,7 +11,7 @@ namespace rpc {
 class service
 	:
 	private boost::noncopyable,
-//	public rpcboost::utils::destory_guard
+	public rpcboost::utils::destory_guard
 {
 public:
 	service(rpcboost::rpc::rpc_channel* channel);

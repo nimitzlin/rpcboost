@@ -19,7 +19,7 @@ typedef std::vector<boost::asio::const_buffer> async_write_buffers;
 
 class normal_listen_connection
 	:
-	public gt::common::connection
+	public rpcboost::common::connection
 	
 {
 public:
@@ -36,7 +36,7 @@ public:
 	
 	virtual void start_work();
 	virtual void close_socket();
-	virtual void async_write_data(gt::common::write_buf_ptr data);
+	virtual void async_write_data(rpcboost::common::write_buf_ptr data);
 	virtual boost::asio::ip::tcp::endpoint get_remote_endpoint();
 	boost::asio::ip::tcp::socket& socket() { return socket_; }
 

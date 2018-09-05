@@ -1,12 +1,12 @@
 
-#include "normal_server_connection.hpp"
+#include "normal_listen_connection.hpp"
 #include "connection_manager.hpp"
 
-namespace gt {
 namespace rpcboost {
+namespace common{
 	
 normal_listen_connection::normal_listen_connection(boost::asio::io_service& io_service):
-	gt::common::connection(io_service),
+	rpcboost::common::connection(io_service),
 	socket_(io_service),
 	buffer_(128),
 	data_queue_size_(0),
@@ -58,7 +58,6 @@ void normal_listen_connection::start_work()
 
 void normal_listen_connection::handle_async_write_data(const boost::system::error_code& e)
 {
-	CHECK(sending_data_);
 	
 	send_queue_->clear();
 	std::size_t sz = data_queue_->size();
@@ -107,7 +106,7 @@ void normal_listen_connection::handle_async_write_data(const boost::system::erro
 	}
 }
 
-void normal_listen_connection::async_write_data(gt::common::write_buf_ptr data)
+void normal_listen_connection::async_write_data(rpcboost::common::write_buf_ptr data)
 {
 
 	if(send_limit_ > 0 && data_queue_size_ > send_limit_)

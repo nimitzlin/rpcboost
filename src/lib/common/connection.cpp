@@ -36,6 +36,6 @@ bool connection::is_alive()
 	return connection_manager::instance().has_connection(shared_from_this());
 }
 
+} // namespace common 
 } // namespace rpcboost
-} // namespace gt
 
